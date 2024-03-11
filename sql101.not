@@ -1,0 +1,341 @@
+EĞİTİMİ BAŞARI İLE TAMAMLADIMI KANITLAYAN SERTİFİKAYA AŞAĞIDAKİ LİNKTEN BAKABİLİRSİNİZ.
+https://gelecegiyazanlar.turkcell.com.tr/kisi/belge/oguzbusiness35/SQL%20ile%20Veritaban%C4%B1%20Sorgulama/101
+
+
+KISA PRATİK NOTLAR !!! KONU ANLATIMI AŞAĞIDA DML KOMUTLARI İLE BAŞLAMAKTADIR. UMARIM HERKESE FAYDA SAĞLAR.
+  
+EXEC SP_SPACEUSED USERS1 ===KARŞILAŞTIRM
+SET IDENTITY_INSERT TABLOADI ON === OTOMATİK ARTMADA HATA VERMEYİ ENGELLER İSTEDİGİN SAYIYI ATARSIN
+
+SELECT DATEDIFF(YEAR,'1967-01-25','2022-12-22')   == İKİ YIL ARASINDAKİ FARKI YIL OLARAK HESAPLAR
+
+SELECT GETDATE()  ==BUGUNUN TARİHİNİ GETİRİR
+
+UPDATE CUSTOMERS SET AGE=DATEDIFF(YEAR,BIRTHDATE,GETDATE())   == AGE KISMINA YAŞLARI HESAPLAYIP GÜNCELLEDİK
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--> DML KOMUTLARI
+1-SELECT KOMUTU
+SELECT = Veritabanındaki tablolardan kayıtları çeker  ve listeler.
+SELECT [ KOLON ADI VE ADLARI ] FROM [ TABLO İSMİ ]
+  
+ÖRNEKLER
+SELECT SURNAME, ID , TCNO FROM TABLEBİLGİ
+SELECT * FROM TABLOİSMİ     HEPSİNİ ÇEKER
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2-INSERT INTO KOMUTU
+INSERT = Tabloya yeni kayıt ekler
+INSERT INTO  [ TABLO İSMİ ] [ KOLON İSMİ HANGİ KOLONA EKLİCEKSEN] VALUES [ EKLİCEGİN DEGER ]
+
+ÖRNEKLER  
+INSERT INTO CUSTOMERS
+(NAMESURNAME,GENDER,BIRTHDATE,CITY,TOWN,TELNR,TCNO)
+VALUES
+('ÖMER ÇOLAKOĞLU','E','1990-01-16','İSTANBUL','KADIKÖY',05511253115,11327562928)
+
+-----------------------------------------------------------------------------
+
+3-UPDATE KOMUTU
+UPDATE = Tablodaki verileri güncellemek için kullanılır.
+UPDATE [TABLO ADI]  SET [KOLON ADI= DEĞERİ ATA]
+WHERE < ŞARTLAR >
+
+ÖRNEK
+UPDATE CUSTOMERS SET NAMESURNAME='OĞUZHAN KADEMLİ'
+
+-------------------------------------------------------------------
+4-DELETE KOMUTU
+DELETE = Tabloda kayıt siler
+DELETE FROM [TABLOADI]
+WHERE <ŞARTLAR>
+
+ÖRNEK
+DELETE FROM CUSTOMERS
+
+----------------------------------------------------------------------------
+5-TRUNCATE KOMUTU
+TRUNCATE = Tablonun içini boşaltır.
+TRUNCATE TABLE [ TABLO İSMİ ]
+
+ÖRNEK
+TRUNCATE TABLE CUSTOMERS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--> KOMUTLAR VE WHERE ŞARTI İLE KULLANIMI 
+
+SELECT KOLON ADI FROM TABLOADI
+WHERE <ŞARTLAR>
+
+SELECT * FROM CUSTOMERS
+WHERE GENDER='E'  --> ERKEKLERİ GETİRİR              WHERE GENDER <> 'E' --> ERKEKTEN  FARKLI ANLAMI GELİR KADINLARI GETİRİR.
+WHERE ID=1 --> 1.Cİ ID GETİRİR                       WHERE ID<>1 --> 1 DEN FARKLI OLANLARI GETİRİR.
+---------------------------------------------------------------------------------------------------
+SELECT *FROM CUSTOMERS2
+WHERE ID>1  --> ID Sİ 1 DEN BÜYÜKLERİ GETİRİR 
+  
+SELECT *FROM CUSTOMERS2
+WHERE ID<2  --> ID'Sİ 2'DEN KÜÇÜKLERİ GETİRİR YANİ SADECE 1 SAYISINI GETİRİR.
+
+ <= , >=   --> OLURSADA O KISMIDA ALIR ÖRNEK 2 YİDE ALIR.
+
+
+SELECT *FROM CUSTOMERS2
+WHERE BIRTHDATE>'1990-01-01' ---> 1990-01-01'DEN SONRA DOĞANLARI GETİRİR
+                             
+
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME<='MZ'
+M VE ÖNCEKİ İSİMLE BAŞLAYANLARI GETİRİR 
+!!! SADECE M YAPARSAN M LİLERİ GETİRMEZ
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+LIKE  --> İLE BAŞLAR ,İLE BİTER, İÇERİR
+NOT LIKE --> İLE BAŞLAMAZ, İLE BİTMEZ, ,İLE İÇERMEZ
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME LIKE 'MEH%' --> ADI MEH İLE BAŞLAYAN ÖRNEĞİN MEHMETİ GETİRİR.
+
+    
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME LIKE 'MEHMET%'  -->ADI MEHMET OLANLARI GETİRİR
+
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME LIKE '%KADEMLİ%' -->İÇERİSİNDE KADEMLİ İSMİ GEÇENLERİ GETİRİR
+
+
+
+
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME LIKE '%KADEMLİ' -->		ADI KADEMLİ İLE BİTENLERİ GETİRİR
+
+
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME LIKE 'MEHMET %' --> İLK İSMİ MEHMET OLANLARI GETİR
+
+
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME LIKE '% CAN' --> SADECE SON İSMİ CAN OLANLARI GETİR
+
+
+
+SELECT * FROM CUSTOMERS2
+
+WHERE NAMESURNAME LIKE '% MEHMET %' --> BAŞINA VE SONUNA BOŞLUK GETİRİRSEN İKİNCİ İSMİ MEHMET OLANLARI GETİRİR.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME NOT LIKE 'MEHMET%' --> ISMI MEHMET OLMAYANLARI GETİRİR
+
+
+
+SELECT * FROM CUSTOMERS2
+WHERE NAMESURNAME NOT LIKE '%MEHMET%' --> ISMİNİN İÇİNDE MEHMET GEÇMEYENLERİ GETİRİR , KICASI LIKE'IN TAM TERSİ
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+SELECT * FROM CUSTOMERS2
+WHERE BIRTHDATE BETWEEN '1990-01-01' AND GETDATE() --> 1990-01-01 DAHİL VE GUNUMUZ DAHİL OLANA KADAR ARASINDAKİ DEGERLERİ GETİRİR
+
+
+
+WHERE ID BETWEEN 1 AND 3
+--> 1 VE 3 ARASINDAKİLERİ VE 1 VE 3 ÜDE DAHİL EDEREK GETİRİR
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+IN VE NOT IN KOMUTLARI KULLANIMI VE ÖRNEKLERİ
+
+IN ===İÇİNDE
+NOT IN ===İÇİNDE DEĞİL
+
+SELECT * FROM CUSTOMERS2
+WHERE ID IN (1,3,5) --> ID'Sİ 1,3,5 OLANLARI GETİRİR
+
+SELECT * FROM CUSTOMERS2
+WHERE AGE IN (50) --> YAŞI 50 OLANLARI GETİRİR
+	
+
+SELECT * FROM CUSTOMERS2
+WHERE AGE NOT IN (50) --> YAŞI 50 OLANLAR HARİÇ DİĞERLERİNİ GETİRİR
+	 
+
+SELECT * FROM CUSTOMERS2
+WHERE CITY IN('İSTANBUL','İZMİR') --> 	ŞEHRİ İSTANBUL VE İZMİR OLANLARI GETİRİR
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+UPDATE CUSTOMERS2 SET GSM='TURKCEL'
+WHERE ID=1 --> SADECE 1 NUMARALI ID NİN GSM'İNİ TURKCEL YAPTIK
+	
+
+UPDATE CUSTOMERS2 SET GSM='TURKCEL'
+WHERE ID>1 --> ID Sİ 1 DEN BÜYÜK OLANLARIN HEPSİNİ TURKCEL YAPTIK
+
+	
+
+UPDATE CUSTOMERS2 SET GSM='VODOFONE'
+WHERE CITY='İZMİR' --> 	ŞEHRİ İZMİR OLANLARIN GSM 'Nİ VODOFONE YAPTIK
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DELETE FROM CUSTOMERS2
+WHERE CITY='KONYA' --> 	ŞEHRİ KONYA OLANLARI SİLER
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AND OPERATÖRÜ = İKİ ŞARTINDA VEYA TÜM ŞARTLARIN SAĞLANMASI GEREKİR
+
+SELECT * FROM CUSTOMERS2 
+WHERE CITY='İSTANBUL' AND GENDER='K' --> HEM İSTANBULDA YAŞAMA HEMDE KADIN OLMA ŞARTI OLUCAK İKİSİNİ SAĞLICAK VE ONLARI GETİRİR
+	
+
+SELECT * FROM CUSTOMERS2 
+WHERE CITY='İSTANBUL' AND GENDER='K' AND TOWN='KADIKOY' --> 3 ŞARTIDA SAĞLAYANLARI GETİRİR
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OR OPERATÖRÜ = ŞARTLARDAN BİRİNİ SAĞLAMASI YETERLİ
+
+SELECT * FROM CUSTOMERS2 
+WHERE CITY='İSTANBUL' OR GENDER='K'  ---> 	ŞEHRİ İSTANBUL OLAN VEYA CİNSİYETİ KADIN OLANLARI GETİR, BİRİNİ KARŞILAMASI YETERLİDİR.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	DİĞER SQL KOMUTLARI
+				
+
+
+DISTINCT = Sorgu sonucunun tekilleştirilmesini sağlar. tekrar eden verileri tekilleştirir.
+SELECT  DISTINCT CITY  FROM CUSTOMERS2  -> Örnegin 3 istanbul,5 izmir warsa tekil yapar 1 izmir 1 istanbul gösterir
+
+
+SELECT  DISTINCT CITY,TOWN  FROM CUSTOMERS2 
+WHERE CITY='İZMİR' 	--> izmir şehrindeki ilçeleri tekilleştirir örnegın 10 tane karabaglar warsa  1 tane karabaglar gösterir.
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ORDER BY = Sorgu sonucunun belli bir sırada  gelmesini sağlar.
+  
+SELECT * FROM CUSTOMERS2
+ORDER BY NAMESURNAME ASC ---> İlk ten sona sıralar
+
+SELECT * FROM CUSTOMERS2
+ORDER BY NAMESURNAME DESC --> Sondan ilke göre sıralar 
+
+SELECT * FROM CUSTOMERS2
+ORDER BY CITY,TOWN --> şehirleri sıraladı ilkten sona , daha sonra ilçeleri ilkten sona sıraladı
+
+SELECT * FROM CUSTOMERS2
+ORDER BY CITY,TOWN,NAMESURNAME
+-->  şehirleri sıraladı ilkten sona , daha sonra ilçeleri ilkten sona sıraladı ve örnegin 2 tane 
+aynı ilçe olan karabaglar denk geldi bunların sıralamasınıda isme göre yapmış olduk ismide ilkten sona doğru sıraladık
+
+
+SELECT * FROM CUSTOMERS2
+ORDER BY CITY,TOWN DESC ,NAMESURNAME --> -->city ilkten sonra , townu sondan ilke, namesurname ilkten sona sıraladı.
+
+
+diğer kullanımları 
+örneegin ıd 1.sutundaysa ve 2.sutunda city varsa
+order by 1 dersen ıd leri sıralar
+order by 2 dersen 2 de city varsa cityi sıralar
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOP = Sorgu sonucunun dönen satırların sadece bir kısmının gelmesini sağlar.
+
+
+SELECT TOP 3 *FROM CUSTOMERS2
+ORDER BY BIRTHDATE --> ilk 3 satırı getirir ve onlarıda sıraladık
+
+
+SELECT TOP 50 PERCENT *FROM CUSTOMERS2
+ORDER BY BIRTHDATE --> listenın %50 sini getirir
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ALIAS KULLANIMI
+
+SELECT ID , NAMESURNAME,GENDER FROM CUSTOMERS
+---> BURDA BEN Id yerine müsterino yazmasını istiyorum onuda
+SELECT ID AS MUSTERINO,NAMESURNAME,GENDER FROM CUSTOMERS
+---> AS ile ismini değiştirebiliyoruz
+
+SELECT ID MÜSTERİNO , NAMESURNAME İSİMSOYİSİM,GENDER YAŞ FROM CUSTOMERS2 
+--> AS KULLANMADANDA BU ŞEKİL YAPABİLİYORUZ DAHA İYİ
+
+SELECT C.ID AS MÜSTERİNO , C.NAMESURNAME AS İSİMSOYİSİM,C.GENDER AS YAŞ FROM CUSTOMERS C
+--> TABLONUN İSMİNİDE C İLE DEĞİŞTİRDİK
+SELECT C.ID  MÜSTERİNO , C.NAMESURNAME  İSİMSOYİSİM,C.GENDER  YAŞ FROM CUSTOMERS C
+---> AS KULLANMADAN DA BU ŞEKİLDEDE YAPABİLİYORUZ
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DLL KOMUTLARI KULLANIMI VE ÖRNEKLERİ 
+
+CREAT=Bir veritabanı nesnesini oluşturmak için kullanılır.
+
+	CREATE <NESNE TÜRÜ>NESNEADI
+	(
+	  NESNE ÖZELLİKLERİ
+	)
+
+
+CREATE DATABASE TEST   -->> TEST ADINDA VERİTABANI OLUŞTURDUK	
+
+
+CREATE TABLE CUSTOMERS                          
+(
+ID INT, //ID INT IDENTITY(1,1), YAPARSAK otomatik artmayı açarız 1 den başlar 1'er 1'Er artar
+NAMESURNAME VARCHAR(100), // sonuna NOT NULL yaparsak içi boş geçirilemez kuralı eklemiş oluruz
+GENDER VARCHAR(1),
+BIRTHDATE DATE,
+CITY VARCHAR(50), // prımary key koyarsak sonuna bunu birincil anahtar yaparız.
+TOWN VARCHAR(50),
+TELNR VARCHAR(15),
+TCNO VARCHAR(11),
+)                 -->> TABLO OLUŞTURDUK VE DEĞİŞKENLERİ İÇERİSİNE EKLEDİK
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER=Bir veritabanı nesnesinin bir özelliğini değiştirmek için kullanılır.
+
+ALTER <NESNE TÜRÜ> NESNE ADI
+<NESNE ÖZELLİKLERİ>
+
+ALTER TABLE CUSTOMERS ADD PRIMARY KEY(ID)  --> ID'Yİ PRİMARY KEY ATADIK.
+
+ALTER TABLE CUSTOMERS ADD YAS INT  --> YAS ADINDA BİR SUTUN EKLEDİK
+ALTER TABLE CUSTOMERS ALTER COLUMN NAMESURNAME VARCHAR(100) NOT NULL -->NAMESURNAME ALANINI VARCHAR OLARAK DEĞİŞTİRİP NOT NULL YAPARAK İÇİNİN BOŞ OLMAMASINI SAĞLADIK YANİ MECBUR VERİ GİRİLECEK YOKSA HATA VERİR.
+ALTER TABLE CUSTOMERS ALTER COLUMN GENDER VARCHAR(10) --> GENDER ADINDA BİR SUTUN EKLEDİK VE VARCHAR OLARAK BELİRLEDİK.
+
+ALTER TABLE CUSTOMERS DROP COLUMN AGEGROUP --> AGEGROUP SUTUNUNU GERİ DÖNÜŞÜ OLMAYAN ŞEKİLDE DROP KOMUTU İLE SİLDİK.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DROP=Bir veritabanı nesnesinin silmek için kullanılır.
+DROP <NESNE TÜRÜ> NESNEADI
+DROP TABLE CUSTOMERS  --> CUSTOMERS TABLOSU GERİ DÖNÜŞÜ OLMUCAK ŞEKİLDE SİLİNDİ. 
+DROP DATABASE TEST --> TEST VERİTABANI GERİ DÖNÜŞÜ OLMUCAK ŞEKİLDE SİLİNDİ.
+
+
+
+
+
+
+
+
+
+
+
